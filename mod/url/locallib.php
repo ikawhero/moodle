@@ -401,7 +401,7 @@ function url_get_final_display_type($url) {
  * @return array array describing opt groups
  */
 function url_get_variable_options($config) {
-    global $CFG;
+    global $CFG, $DB;
 
     $options = array();
     $options[''] = array('' => get_string('chooseavariable', 'url'));
@@ -450,6 +450,14 @@ function url_get_variable_options($config) {
         'usertimezone'    => get_string('timezone'),
         'userurl'         => get_string('webpage'),
     );
+    
+    if ($customfields = $DB->get_records('user_info_field', array('visible'=>2), '', 'shortname, name')) {
+        $customfieldoptions = array();
+        foreach ($customfields as $cf) {
+            $customfieldoptions["profile_$cf->shortname"] = $cf->name;
+        }
+        $options[get_string('profilefields', 'admin')] = $customfieldoptions;
+    }
 
     if ($config->rolesinparams) {
         $roles = get_all_roles();
@@ -510,6 +518,10 @@ function url_get_variable_values($url, $cm, $course, $config) {
         $values['usercity']        = $USER->city;
         $values['usertimezone']    = get_user_timezone_offset();
         $values['userurl']         = $USER->url;
+
+        foreach ($USER->profile as $fieldname=>$fielddata) {
+            $values["profile_$fieldname"] = $fielddata;
+        }
     }
 
     // weak imitation of Single-Sign-On, for backwards compatibility only
