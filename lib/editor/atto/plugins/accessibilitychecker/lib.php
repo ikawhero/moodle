@@ -38,3 +38,18 @@ function atto_accessibilitychecker_strings_for_js() {
                                     'atto_accessibilitychecker');
 }
 
+/**
+ * Set params for this plugin.
+ *
+ * @param string   $elementid
+ * @param stdClass $options - the options for the editor, including the context.
+ * @param stdClass $fpoptions - unused.
+ * @return array
+ */
+function atto_accessibilitychecker_params_for_js($elementid, $options, $fpoptions) {
+    if (! $level = get_config('atto_accessibilitychecker', 'level')) {
+        $level = 2; // Default level AA.
+    }
+
+    return array('level' => $level);
+}
