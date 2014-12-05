@@ -22,8 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Accessibility checker';
-$string['nowarnings'] = 'Congratulations, no accessibility problems found!';
-$string['report'] = 'Accessibility report:';
 $string['imagesmissingalt'] = 'Images require alternative text. To fix this warning, add an alt attribute to your img tags. An empty alt attribute may be used, but only when the image is purely decorative and carries no information.';
+$string['level'] = 'Level';
+$string['leveldesc'] = 'WCAG 2.0 level. This setting primarily affects contrast ratios in content.';
 $string['needsmorecontrast'] = 'The colours of the foreground and background text do not have enough contrast. To fix this warning, change either foreground or background colour of the text so that it is easier to read.';
+$string['nowarnings'] = 'Congratulations, no accessibility problems found!';
+$string['pluginname'] = 'Accessibility checker';
+$string['report'] = 'Accessibility report:';
+$string['settings'] = 'Accessibility checker settings';
